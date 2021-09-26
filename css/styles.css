@@ -4,27 +4,34 @@
   font-family: 'Merriweather', serif;
 }
 
+body, h1, h3 {
+  margin: 0;
+}
+
 body {
   display: flex;
   flex-direction: column;
   text-align: center;
-  background-color: #FE8F8F;
-}
-
-header, main {
   background-color: #FCD2D1;
 }
 
-header {
-  padding: 1rem 1rem 0 1rem;
+header, main {
+  /* height: calc(50vh - 8px); */
+  background-color: #FCD2D1;
+}
+
+div {
+  background-color: #FE8F8F;
 }
 
 h1 {
+  padding-top: 2rem;
   font-size: 1.5rem;
   text-transform: uppercase;
 }
 
 h3 {
+  padding: .75rem 0 2rem 0;
   font-size: .9rem;
 }
 
@@ -49,19 +56,50 @@ button {
 }
 
 main {
-  padding: 0 1rem 1rem 1rem;
+  padding: 0 1rem 0 1rem;
 }
 
 #results {
-  padding: 1.3rem 0;
+  padding-top: 1.3rem;
   font-weight: bold;
 }
 
 /* Media Queries ------------------- */
 @media (min-width: 768px) {
-  body {
+  h1 {
+    padding-top: 3rem;
+    font-size: 2em;
+  }
+
+  h3 {
+    padding-bottom: 3rem;
+    font-size: 1.17em;
+  }
+
+  form, main {
     margin-left: auto;
     margin-right: auto;
+    width: 65%;
+    background-color: #FCD2D1;
+  }
+
+  button {
+    margin: 2.5rem auto 1.5rem auto;
+    display: block;
     width: 50%;
+  }
+
+  p {
+    padding: .5rem 0;
+  }
+
+  #results {
+    font-size: 1.2rem;
+  }
+}
+
+@media (min-width: 1380px) {
+  button {
+    width: 25%;
   }
 }
