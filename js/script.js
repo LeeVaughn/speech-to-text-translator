@@ -62,7 +62,29 @@ async function getTranscription(url="", data= {}) {
 function displayError(msg) {
   const errorMessage = `<p class="error">${msg}</p>`;
 
+  // makes sure main section is hidden before displaying error
+  document.querySelector("main").style.display = "none";
+
   document.querySelector("body").insertAdjacentHTML("beforeend", errorMessage);
+}
+
+/**
+ * Displays results of accuracy test
+ * 
+ * @param {string} text - transcribed text from the audio file
+ */
+ function displayResults(text) {
+  console.log(text);
+  testPhrase(text);
+}
+
+/**
+ * Compares transcribed phrase to tongue twister constant
+ * 
+ * @param {string} text - transcribed text from the audio file
+ */
+ function testPhrase(text) {
+  console.log(text);
 }
 
 // listens for changes on the Audio Files dropdown, then transcribes the corresponding audio file based on the option selected
@@ -107,12 +129,11 @@ document.querySelector("form").addEventListener("submit", (e) => {
   } else {
     getTranscription(`https://api.assemblyai.com/v2/transcript/${transcribedFileID}`)
       .then(data => {
-        console.log(data);
         if (data.status === "processing") {
           displayError("The data is still processing. Please try again in a moment.");
         } else {
           transcribedText = data.text;
-          console.log(transcribedText)
+          displayResults(transcribedText);
         }
       })
       .catch((err) => console.error(err));
