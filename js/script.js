@@ -9,6 +9,8 @@ let transcribedFileID;
 // will be used to store the translated text
 let transcribedText;
 
+// hide test results section upon page load
+document.querySelector("main").style.display = "none";
 
 /**
  * Transcribes audio file
@@ -91,4 +93,20 @@ document.getElementById("twisters").addEventListener("change", () => {
       transcribedFileID = data.id;
     })
     .catch((err) => console.error(err));  
+});
+
+document.querySelector("form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  
+  getTranscription(`https://api.assemblyai.com/v2/transcript/${transcribedFileID}`)
+    .then(data => {
+      console.log(data);
+      if (data.status === "processing") {
+        console.log("the data is still processing")
+      } else {
+        transcribedText = data.text;
+        console.log(transcribedText)
+      }
+    })
+    .catch((err) => console.error(err));
 });
