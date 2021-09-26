@@ -54,18 +54,16 @@ async function getTranscription(url="", data= {}) {
   return response.json();
 }
 
-// getTranscription("https://api.assemblyai.com/v2/transcript/njts9e60i-0322-46a5-9167-253baa130f82")
-// .then(data => {
-//   console.log(data);
-// })
-// .catch((err) => console.error(err));
+/**
+ * Displays error message
+ * 
+ * @param {string} msg - error message to display
+ */
+function displayError(msg) {
+  const errorMessage = `<p class="error">${msg}</p>`;
 
-// getTranscription(`https://api.assemblyai.com/v2/transcript/${fileId}`)
-// .then(data => {
-//   console.log(data);
-// })
-// .catch((err) => console.error(err));
-
+  document.querySelector("body").insertAdjacentHTML("beforeend", errorMessage);
+}
 
 // listens for changes on the Audio Files dropdown, then transcribes the corresponding audio file based on the option selected
 document.getElementById("twisters").addEventListener("change", () => {
@@ -97,16 +95,26 @@ document.getElementById("twisters").addEventListener("change", () => {
 
 document.querySelector("form").addEventListener("submit", (e) => {
   e.preventDefault();
-  
-  getTranscription(`https://api.assemblyai.com/v2/transcript/${transcribedFileID}`)
-    .then(data => {
-      console.log(data);
-      if (data.status === "processing") {
-        console.log("the data is still processing")
-      } else {
-        transcribedText = data.text;
-        console.log(transcribedText)
-      }
-    })
-    .catch((err) => console.error(err));
+
+  // removes any previously displayed error messages
+  if (document.querySelector(".error")) {
+    document.querySelector(".error").remove();
+  }
+
+  // displays error if an audio file isn't selected, else attempts to transcribe file
+  if (!selectedFile) {
+    displayError("Please select an audio file");
+  } else {
+    getTranscription(`https://api.assemblyai.com/v2/transcript/${transcribedFileID}`)
+      .then(data => {
+        console.log(data);
+        if (data.status === "processing") {
+          console.log("the data is still processing")
+        } else {
+          transcribedText = data.text;
+          console.log(transcribedText)
+        }
+      })
+      .catch((err) => console.error(err));
+  }
 });
