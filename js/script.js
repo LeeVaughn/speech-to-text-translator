@@ -109,7 +109,7 @@ document.querySelector("form").addEventListener("submit", (e) => {
       .then(data => {
         console.log(data);
         if (data.status === "processing") {
-          console.log("the data is still processing")
+          displayError("The data is still processing. Please try again in a moment.");
         } else {
           transcribedText = data.text;
           console.log(transcribedText)
