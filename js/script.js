@@ -42,7 +42,7 @@ async function transcribeFile(url="", data= {}) {
  * @param {object} data - init object
  * @return {object} response data in the form of a JSON object
  */
-async function getTranscription(url="", data= {}) {
+async function getTranscription(url="") {
   const response = await fetch(url, {
     method: "GET",
     mode: "cors",
