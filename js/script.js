@@ -143,13 +143,9 @@ document.getElementById("twisters").addEventListener("change", () => {
     .catch((err) => console.error(err));  
 });
 
+// listens for the form to be submitted, then gets transcription and displays the results
 document.querySelector("form").addEventListener("submit", (e) => {
   e.preventDefault();
-
-  // removes any previously displayed error messages
-  if (document.querySelector(".error")) {
-    document.querySelector(".error").remove();
-  }
 
   // displays error if an audio file isn't selected, else attempts to transcribe file
   if (!selectedFile) {
