@@ -108,6 +108,7 @@ function displayError(msg) {
     if (text.indexOf(word) !== -1) {
       correctWordCount += 1;
     }
+  });
 
   return Math.round((correctWordCount / (correctPhrase.length)) * 100);
 }
