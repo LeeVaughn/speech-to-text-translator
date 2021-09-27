@@ -2,15 +2,16 @@ const peterConstant = ["peter", "piper", "picked", "a", "peck", "of", "pickled",
 const sallyConstant = ["silly", "sally", "swiftly", "shooed", "seven", "silly", "sheep"];
 const woodchuckConstant = ["how", "much", "wood", "would", "a", "woodchuck", "chuck", "if", "a", "woodchuck", "could", "chuck", "wood"];
 const seashellsConstant = ["she", "sells", "seashells", "by", "the", "seashore"];
-// will be used to store which audio file was selected from the dropdown
-let selectedFile;
 // will be used to store index of selected audio file
 let selectedFileIndex;
+// will be used to track the correct phrase
+let correctPhrase;
+// will be used to store which audio file was selected from the dropdown
+let selectedFile;
 // will be used to store the ID of the transcribed file
 let transcribedFileID;
 // will be used to store the translated text
 let transcribedText;
-let accuracyPercent = 0;
 
 // hide test results section upon page load
 document.querySelector("main").style.display = "none";
@@ -77,8 +78,16 @@ function displayError(msg) {
  * @param {string} text - transcribed text from the audio file
  */
  function displayResults(text) {
-  console.log(text);
-  testPhrase(text);
+  const results = testPhrase(text);
+  const main = document.querySelector("main");
+  const mainHTML = `
+    <p id="constant">The phrase was "<span class="constant">${correctPhrase.join(" ")}</span>"</p>
+    <p id="spoken">The speaker said "<span>${transcribedText}</span>"</p>
+    <p id="results">Phrase Accuracy: ${results}%</p>
+  `
+
+  main.innerHTML = mainHTML;
+  main.style.display = "";
 }
 
 /**
@@ -88,7 +97,6 @@ function displayError(msg) {
  * @return {number} a number representing the % of words in the phrase correctly guessed
  */
  function testPhrase(text) {
-  let correctPhrase;
   let correctWordCount = 0;
 
   if (selectedFileIndex === 1 || selectedFileIndex === 2) {
