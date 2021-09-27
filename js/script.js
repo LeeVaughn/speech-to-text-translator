@@ -4,10 +4,13 @@ const woodchuckConstant = ["how", "much", "wood", "would", "a", "woodchuck", "ch
 const seashellsConstant = ["she", "sells", "seashells", "by", "the", "seashore"];
 // will be used to store which audio file was selected from the dropdown
 let selectedFile;
+// will be used to store index of selected audio file
+let selectedFileIndex;
 // will be used to store the ID of the transcribed file
 let transcribedFileID;
 // will be used to store the translated text
 let transcribedText;
+let accuracyPercent = 0;
 
 // hide test results section upon page load
 document.querySelector("main").style.display = "none";
@@ -84,7 +87,21 @@ function displayError(msg) {
  * @param {string} text - transcribed text from the audio file
  */
  function testPhrase(text) {
-  console.log(text);
+  let correctPhrase;
+  let correctWordCount = 0;
+
+  if (selectedFileIndex === 1 || selectedFileIndex === 2) {
+    correctPhrase = peterConstant;
+  }
+  if (selectedFileIndex === 3 || selectedFileIndex === 4) {
+    correctPhrase = sallyConstant;
+  }
+  if (selectedFileIndex === 5 || selectedFileIndex === 6) {
+    correctPhrase = woodchuckConstant;
+  }
+  if (selectedFileIndex === 7 || selectedFileIndex === 8) {
+    correctPhrase = seashellsConstant;
+  }
 }
 
 // listens for changes on the Audio Files dropdown, then transcribes the corresponding audio file based on the option selected
@@ -104,7 +121,8 @@ document.getElementById("twisters").addEventListener("change", () => {
   Array.from(document.querySelector("#twisters").options).forEach((option, index) => {
     if (option.selected === true) {
       // the `index - 1` accounts for the fact that the first option in the twisters dropdown is not present in the audioURLs array
-      selectedFile = audioURLs[index - 1]
+      selectedFile = audioURLs[index - 1];
+      selectedFileIndex = index;
     }
   });
 
