@@ -85,6 +85,7 @@ function displayError(msg) {
  * Compares transcribed phrase to tongue twister constant
  * 
  * @param {string} text - transcribed text from the audio file
+ * @return {number} a number representing the % of words in the phrase correctly guessed
  */
  function testPhrase(text) {
   let correctPhrase;
@@ -102,6 +103,13 @@ function displayError(msg) {
   if (selectedFileIndex === 7 || selectedFileIndex === 8) {
     correctPhrase = seashellsConstant;
   }
+
+  correctPhrase.forEach(word => {
+    if (text.indexOf(word) !== -1) {
+      correctWordCount += 1;
+    }
+
+  return Math.round((correctWordCount / (correctPhrase.length)) * 100);
 }
 
 // listens for changes on the Audio Files dropdown, then transcribes the corresponding audio file based on the option selected
