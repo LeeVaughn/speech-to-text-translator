@@ -121,11 +121,11 @@ document.getElementById("twisters").addEventListener("change", () => {
     "https://github.com/LeeVaughn/tongue-twister-tester/blob/master/audio-files/peter-dawn.m4a?raw=true",
     "https://github.com/LeeVaughn/tongue-twister-tester/blob/master/audio-files/peter-lee.m4a?raw=true",
     "",
+    "https://github.com/LeeVaughn/tongue-twister-tester/blob/master/audio-files/sally-lee.m4a?raw=true",
     "",
+    "https://github.com/LeeVaughn/tongue-twister-tester/blob/master/audio-files/woodchuck-lee.m4a?raw=true",
     "",
-    "",
-    "",
-    ""
+    "https://github.com/LeeVaughn/tongue-twister-tester/blob/master/audio-files/seashells-lee.m4a?raw=true"
   ]
 
   Array.from(document.querySelector("#twisters").options).forEach((option, index) => {
